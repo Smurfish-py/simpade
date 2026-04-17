@@ -1,6 +1,7 @@
 <h2 align="center">
 
 ![simpade_logo](/frontend/public/logo/simpade_logo.png)
+
 Situs transparansi pengelolaan dana online
 
 </h2>
