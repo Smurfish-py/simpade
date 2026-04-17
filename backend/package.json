@@ -1,0 +1,20 @@
+{
+  "name": "simpade-backend",
+  "version": "1.0.0",
+  "description": "Backend untuk aplikasi simpade",
+  "homepage": "https://github.com/Smurfish-py/simpade#readme",
+  "bugs": {
+    "url": "https://github.com/Smurfish-py/simpade/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smurfish-py/simpade.git"
+  },
+  "license": "ISC",
+  "author": "smurfish-py, rasyairham, galhprmnrzk",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
