@@ -14,8 +14,8 @@ export default function Header() {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
-                <a href="" className="btn btn-ghost">Masuk</a>
-                <a href="" className="btn btn-primary">Daftar</a>
+                <a href="/login" className="btn btn-ghost">Masuk</a>
+                <a href="/register" className="btn btn-primary">Daftar</a>
             </div>
         </header>
     )
