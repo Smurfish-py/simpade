@@ -1,6 +1,6 @@
 export default function Header({ headerTitle }) {
     return (
-        <header className="navbar shadow-sm px-8">
+        <header className="navbar bg-base-100 shadow-sm px-8">
             <div className="navbar-start">
                 <h2 className="text-3xl font-semibold">{ headerTitle }</h2>
             </div>
