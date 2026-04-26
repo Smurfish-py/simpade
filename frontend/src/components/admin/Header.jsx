@@ -1,7 +1,12 @@
+import { SidebarOpen } from "lucide-react";
+
 export default function Header({ headerTitle }) {
     return (
         <header className="navbar bg-base-100 shadow-sm px-8">
-            <div className="navbar-start">
+            <div className="navbar-start gap-4">
+                <label htmlFor="admin-panel" className="btn btn-square btn-ghost lg:hidden">
+                    <SidebarOpen />
+                </label>
                 <h2 className="text-3xl font-semibold">{ headerTitle }</h2>
             </div>
             <div className="navbar-end gap-2">

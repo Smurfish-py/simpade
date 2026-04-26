@@ -1,7 +1,34 @@
-import { AdminHeader } from "@/components/Admin";
+import { useState } from "react";
+import { AdminHeader, AdminModal } from "@/components/Admin";
 import { BadgeDollarSign, BadgePercent, Wallet } from 'lucide-react';
 
 export default function Dashboard() {
+    const [ selectedData, setSelectedData ] = useState(null);
+
+    function openModal(data) {
+        document.getElementById("selected_modal").showModal();
+        setSelectedData(data);
+    }
+
+    const data = [
+        {
+            tanggal: "20 April 2026",
+            jenis: "Pengeluaran",
+            kategori: "Proyek Jembatan",
+            nominal: 10000000,
+            penanggung_jawab: "Bpk. Asep",
+            keterangan: "Anggaran Jembatan Desa",
+        },
+        {
+            tanggal: "20 April 2026",
+            jenis: "Pemasukan",
+            kategori: "APBD",
+            nominal: 20000000,
+            penanggung_jawab: "Bpk. Wahyu",
+            keterangan: "APBD",
+        },
+    ]
+
     return (
         <>
             <AdminHeader headerTitle="Dashboard" />
@@ -50,27 +77,21 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="hover:bg-base-300">
-                                <th>1</th>
-                                <td>20 April 2026</td>
-                                <td>Pengeluaran</td>
-                                <td>Proyek Jembatan</td>
-                                <td>Rp. 10.000.000</td>
-                                <td>Bpk. Asep</td>
-                                <td>Anggaran Jembatan Desa</td>
-                            </tr>
-                            <tr className="hover:bg-base-300">
-                                <th>2</th>
-                                <td>20 April 2026</td>
-                                <td>Pemasukan</td>
-                                <td>APBD</td>
-                                <td>Rp. 20.000.000</td>
-                                <td>Bpk. Wahyu</td>
-                                <td>APBD</td>
-                            </tr>
+                            { data?.map((item, index) => (
+                                <tr key={index} className="hover:bg-base-300 cursor-pointer" onClick={() => openModal(item)} >
+                                    <th>{ index + 1 }</th>
+                                    <td>{ item?.tanggal }</td>
+                                    <td>{ item?.jenis }</td>
+                                    <td>{ item?.kategori }</td>
+                                    <td>Rp. { item?.nominal?.toLocaleString('id-ID') }</td>
+                                    <td>{ item?.penanggung_jawab }</td>
+                                    <td>{ item?.keterangan }</td>
+                                </tr>
+                            )) }
                         </tbody>
                     </table>
                 </div>
+                <AdminModal data={ selectedData } />
             </main>
         </>
     )
