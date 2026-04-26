@@ -1,33 +1,12 @@
 import { useState } from "react";
-import { AdminHeader, AdminModal } from "@/components/Admin";
+import { AdminHeader, AdminModal, AdminChart } from "@/components/Admin";
 import { BadgeDollarSign, BadgePercent, Wallet } from 'lucide-react';
+
+import { DummyData, ChartDummy } from "@/utils/dummyData";
+import { openModal } from "@/utils/UI";
 
 export default function Dashboard() {
     const [ selectedData, setSelectedData ] = useState(null);
-
-    function openModal(data) {
-        document.getElementById("selected_modal").showModal();
-        setSelectedData(data);
-    }
-
-    const data = [
-        {
-            tanggal: "20 April 2026",
-            jenis: "Pengeluaran",
-            kategori: "Proyek Jembatan",
-            nominal: 10000000,
-            penanggung_jawab: "Bpk. Asep",
-            keterangan: "Anggaran Jembatan Desa",
-        },
-        {
-            tanggal: "20 April 2026",
-            jenis: "Pemasukan",
-            kategori: "APBD",
-            nominal: 20000000,
-            penanggung_jawab: "Bpk. Wahyu",
-            keterangan: "APBD",
-        },
-    ]
 
     return (
         <>
@@ -61,8 +40,9 @@ export default function Dashboard() {
                         <div className="stat-desc">Data per Juli 2026</div>
                     </div>
                 </div>
-                <div className="divider"></div>
-                <h2 className="text-2xl font-semibold mb-6">Data Transaksi</h2>
+                <div className="grid grid-cols-1 lg:grid-cols-2 my-4 gap-4">
+                    <AdminChart series={ ChartDummy }  />
+                </div>
                 <div className="overflow-x-auto card shadow-sm bg-base-100">
                     <table className="table table-zebra">
                         <thead>
@@ -77,8 +57,8 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            { data?.map((item, index) => (
-                                <tr key={index} className="hover:bg-base-300 cursor-pointer" onClick={() => openModal(item)} >
+                            { DummyData?.map((item, index) => (
+                                <tr key={index} className="hover:bg-base-300 cursor-pointer" onClick={() => openModal(item, "selected_modal", setSelectedData)} >
                                     <th>{ index + 1 }</th>
                                     <td>{ item?.tanggal }</td>
                                     <td>{ item?.jenis }</td>
