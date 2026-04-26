@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { AdminHeader, AdminModal } from "@/components/Admin";
+import { AdminHeader, AdminModal, InputModal } from "@/components/Admin";
+import { ConfirmModal } from "@/components/Public";
 import { BadgeDollarSign, BadgePercent, Wallet } from 'lucide-react';
+import { openModal } from "@/utils/action";
 
 export default function Dashboard() {
     const [ selectedData, setSelectedData ] = useState(null);
-
-    function openModal(data) {
-        document.getElementById("selected_modal").showModal();
-        setSelectedData(data);
-    }
 
     const data = [
         {
@@ -18,6 +15,7 @@ export default function Dashboard() {
             nominal: 10000000,
             penanggung_jawab: "Bpk. Asep",
             keterangan: "Anggaran Jembatan Desa",
+            status: "Selesai",
         },
         {
             tanggal: "20 April 2026",
@@ -26,6 +24,7 @@ export default function Dashboard() {
             nominal: 20000000,
             penanggung_jawab: "Bpk. Wahyu",
             keterangan: "APBD",
+            status: "Pending",
         },
     ]
 
@@ -74,11 +73,12 @@ export default function Dashboard() {
                                 <th>Nominal</th>
                                 <th>Penanggung Jawab</th>
                                 <th>Keterangan</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             { data?.map((item, index) => (
-                                <tr key={index} className="hover:bg-base-300 cursor-pointer" onClick={() => openModal(item)} >
+                                <tr key={index} className="hover:bg-base-300 cursor-pointer" onClick={() => openModal("selected_modal", item, setSelectedData)} >
                                     <th>{ index + 1 }</th>
                                     <td>{ item?.tanggal }</td>
                                     <td>{ item?.jenis }</td>
@@ -86,12 +86,15 @@ export default function Dashboard() {
                                     <td>Rp. { item?.nominal?.toLocaleString('id-ID') }</td>
                                     <td>{ item?.penanggung_jawab }</td>
                                     <td>{ item?.keterangan }</td>
+                                    <td>{ item?.status }</td>
                                 </tr>
                             )) }
                         </tbody>
                     </table>
                 </div>
                 <AdminModal data={ selectedData } />
+                <InputModal />
+                <ConfirmModal action="logout" confirmStyle="btn-error" />
             </main>
         </>
     )
