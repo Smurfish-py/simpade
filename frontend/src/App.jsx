@@ -12,10 +12,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={ <LandingPage /> } />
+        <Route path="/login" element={<LoginPage />} /> {/* Diubah sesuai import */}
+        <Route path="/register" element={<RegisterPage />} /> {/* Diubah sesuai import */}
+
         <Route element={ <PublicLayout /> }>
-          <Route path="/" element={ <LandingPage /> } />
-          <Route path="/login" element={<LoginPage />} /> {/* Diubah sesuai import */}
-          <Route path="/register" element={<RegisterPage />} /> {/* Diubah sesuai import */}
           <Route path="/dashboard" element={<DashboardPublic />} />
           <Route path="/projects" element={<ProjectPublic />} />
           <Route path="/feedback" element={<Feedback />} />
