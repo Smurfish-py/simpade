@@ -4,6 +4,7 @@ import { LandingPage } from "./pages/public";
 import { DashboardAdmin } from "./pages/admin";
 import { LoginPage } from "./pages/public/Login";
 import { RegisterPage } from "./pages/public/Register";
+import { DashboardAdmin, ProjectPage } from "./pages/admin";
 
 export default function App() {
   return (
@@ -17,6 +18,8 @@ export default function App() {
         
         <Route element={ <AdminLayout /> }>
           <Route path="/admin/dashboard" element={ <DashboardAdmin /> } />
+          <Route path="/admin/dashboard" element={ <DashboardAdmin /> }></Route>
+          <Route path="/admin/projects" element={ <ProjectPage /> }></Route>
         </Route>
       </Routes>
     </BrowserRouter>
