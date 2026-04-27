@@ -19,13 +19,11 @@ export const LoginPage = () => {
         try {
             const res = await API.post('/auth/login', formData);
             
-            // Simpan data ke localStorage
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             
             const userRole = res.data.user.role;
 
-            // Navigasi berdasarkan role yang ada di Backend kamu
             if (userRole === 'admin' || userRole === 'superadmin') {
                 navigate('/admin/dashboard');
             } else {
@@ -39,38 +37,76 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh] bg-gray-50">
-            <div className="w-full max-w-md p-8 bg-white border border-gray-200 rounded-2xl shadow-xl">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login SIMPADE</h2>
-                
-                {error && (
-                    <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg text-center">
-                        {error}
-                    </div>
-                )}
+        <div className="flex justify-center items-center min-h-screen bg-base-200 px-4">
+            <div className="card w-full max-w-md bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title text-3xl font-bold justify-center mb-4 text-primary">
+                        Login SIMPADE
+                    </h2>
+                    
+                    {/* Alert Error */}
+                    {error && (
+                        <div className="alert alert-error shadow-sm mb-4 py-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span className="text-sm">{error}</span>
+                        </div>
+                    )}
 
-                <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email" onChange={handleChange} required 
-                            className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none" 
-                            placeholder="name@company.com" />
-                    </div>
-                    <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password" onChange={handleChange} required 
-                            className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none" 
-                            placeholder="••••••••" />
-                    </div>
-                    <button type="submit" disabled={loading}
-                        className="w-full text-white bg-green-600 hover:bg-green-700 font-bold rounded-lg px-5 py-2.5 transition duration-200">
-                        {loading ? 'Sedang Masuk...' : 'Masuk'}
-                    </button>
-                </form>
+                    <form onSubmit={handleSubmit}>
+                        {/* Input Email */}
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="label-text font-semibold">Email</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="name@company.com" 
+                                className="input input-bordered focus:input-primary w-full" 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </div>
 
-                <p className="mt-6 text-sm text-center text-gray-600">
-                    Belum punya akun? <Link to="/register" className="text-green-600 font-semibold hover:underline">Daftar sekarang</Link>
-                </p>
+                        {/* Input Password */}
+                        <div className="form-control w-full mt-4">
+                            <label className="label">
+                                <span className="label-text font-semibold">Password</span>
+                            </label>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="••••••••" 
+                                className="input input-bordered focus:input-primary w-full" 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            <label className="label">
+                                <span className="label-text-alt link link-hover">Lupa password?</span>
+                            </label>
+                        </div>
+
+                        {/* Tombol Login */}
+                        <div className="form-control mt-6">
+                            <button 
+                                type="submit" 
+                                className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
+                                disabled={loading}
+                            >
+                                {loading ? 'Sedang Masuk' : 'Masuk'}
+                            </button>
+                        </div>
+                    </form>
+
+                    <div className="divider">ATAU</div>
+
+                    <p className="text-sm text-center">
+                        Belum punya akun?{' '}
+                        <Link to="/register" className="link link-primary font-bold italic">
+                            Daftar sekarang
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     );
