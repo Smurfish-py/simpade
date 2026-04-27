@@ -1,6 +1,6 @@
 import { AdminHeader } from "@/components/admin"
 
-export default function ProjectPage() {
+export default function ProjectAdmin() {
     return (
         <>
             <AdminHeader headerTitle="Proyek" />

@@ -36,3 +36,8 @@
   --depth: 1;
   --noise: 1;
 }
+
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
