@@ -23,7 +23,7 @@ export default function AdminLayout() {
             icon: FolderKanban
         },
         {
-            title: "Umpan Balik",
+            title: "Aspirasi",
             dest: "/admin/feedback",
             icon: MessageCircle
         }

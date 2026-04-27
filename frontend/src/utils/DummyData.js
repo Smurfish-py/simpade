@@ -74,4 +74,57 @@ const ChartDummy = [
     }
 ]
 
-export { DummyData, ChartDummy };
+const ProjectData = [
+    {
+        id: 1,
+        nama_proyek: "Jembatan Cinta",
+        lokasi: "Kebon Kopi",
+        koordinat: [-6.906112, 107.565021],
+        tanggal_mulai: "12 Jan 2026",
+        est_selesai: "20 Juni 2026",
+        persentase: 65,
+        status: "Berjalan"
+    },
+    {
+        id: 2,
+        nama_proyek: "Renovasi Aula Utama",
+        lokasi: "SMKN 1 Cimahi",
+        koordinat: [-6.90211757623383, 107.538503828836],
+        tanggal_mulai: "05 Feb 2026",
+        est_selesai: "15 Mei 2026",
+        persentase: 90,
+        status: "Finishing"
+    },
+];
+
+const DummyFeedback = [
+    {
+        id: 1,
+        nama: "Budi Santoso",
+        tanggal: "24 April 2026",
+        kategori: "Saran Pembangunan",
+        pesan: "Mohon untuk penerangan di jalan Kebon Kopi diperbanyak, kalau malam masih terasa sangat gelap di beberapa titik.",
+        inisial: "BS",
+        warna: "bg-blue-500"
+    },
+    {
+        id: 2,
+        nama: "Siti Aminah",
+        tanggal: "20 April 2026",
+        kategori: "Laporan Kerusakan",
+        pesan: "Paving block di area taman Cibeureum ada yang lepas, cukup membahayakan anak-anak yang lari pagi di sana.",
+        inisial: "SA",
+        warna: "bg-green-600"
+    },
+    {
+        id: 3,
+        nama: "Agus Pratama",
+        tanggal: "18 April 2026",
+        kategori: "Aspirasi",
+        pesan: "Terima kasih untuk renovasi aula SMKN 1 Cimahi, sekarang fasilitasnya jauh lebih nyaman untuk kegiatan siswa.",
+        inisial: "AP",
+        warna: "bg-orange-500"
+    }
+];
+
+export { DummyData, ChartDummy, ProjectData, DummyFeedback };
