@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PublicLayout, AdminLayout } from "./layouts";
 import { LandingPage } from "./pages/public";
-import { DashboardAdmin } from "./pages/admin";
 import { LoginPage } from "./pages/public/Login";
 import { RegisterPage } from "./pages/public/Register";
 import { DashboardAdmin, ProjectPage } from "./pages/admin";
