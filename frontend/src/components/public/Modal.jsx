@@ -108,4 +108,15 @@ export default function PublicModal({ data }) {
     );
 }
 
-export { ConfirmModal }
+
+function AdminLoginModal(){
+    return (
+        <dialog id="admin-login" className="modal">
+            <div className="modal-box">
+                <p>Test</p>
+            </div>
+        </dialog>
+    )
+}
+
+export { ConfirmModal, AdminLoginModal }
