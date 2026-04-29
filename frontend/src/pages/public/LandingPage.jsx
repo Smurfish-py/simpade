@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
+
 export default function LandingPage() {
     return (
         <>
             <header className="navbar bg-base-100 shadow-sm">
                 <div className="navbar-start">
-                    <a href="/">
+                    <Link to="/">
                         <img src="/logo/simpade_logo.png" alt="Logo Simpade" width={152} />
-                    </a>
+                    </Link>
                 </div>
+
                 <div className="navbar-center">
                     <ul className="menu menu-horizontal">
                         <li><a>Beranda</a></li>
@@ -14,19 +17,21 @@ export default function LandingPage() {
                         <li><a>Aspirasi</a></li>
                     </ul>
                 </div>
+
                 <div className="navbar-end">
                     <div className="space-x-1">
-                        <a className="btn btn-ghost">Masuk</a>
-                        <a className="btn btn-primary">Daftar</a>
+                        <Link to="/login" className="btn btn-ghost">
+                            Masuk
+                        </Link>
+                        <Link to="/register" className="btn btn-primary">
+                            Daftar
+                        </Link>
                     </div>
                 </div>
             </header>
-            <main>
 
-            </main>
-            <footer>
-
-            </footer>
+            <main></main>
+            <footer></footer>
         </>
-    )
+    );
 }

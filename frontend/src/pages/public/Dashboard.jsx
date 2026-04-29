@@ -5,12 +5,14 @@ import PublicModal from "@/components/Public/Modal"; // Import modal publik yang
 import { openModal } from "@/utils/action"; // Pastikan fungsi openModal tersedia
 
 export function DashboardPublic() {
-    // State untuk menampung data yang sedang dipilih
     const [selectedData, setSelectedData] = useState(null);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const firstName = user?.nama?.split(" ")[0] || "User";
 
     const handleRowClick = (item) => {
         setSelectedData(item);
-        openModal("selected_modal"); // Memanggil fungsi untuk buka dialog
+        openModal("selected_modal");
     };
 
     return (
@@ -18,7 +20,7 @@ export function DashboardPublic() {
             <main className="p-8">
                 <div className="mb-10 mt-10">
                     <h1 className="text-4xl font-bold tracking-tight text-base-content">
-                        Halo, Galih!
+                        Halo, {firstName}!
                     </h1>
                     <p className="text-base-content/60 mt-1 text-lg">
                         Selamat datang di Dashboard Simpade.

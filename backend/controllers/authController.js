@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const User = require('../models/User');
 
 const sendTokenResponse = (user, statusCode, res) => {
@@ -18,9 +19,7 @@ const sendTokenResponse = (user, statusCode, res) => {
 exports.register = async (req, res, next) => {
   try {
     const { nama, email, password, role } = req.body;
-
     const safeRole = role === 'superadmin' ? 'user' : role;
-
     const user = await User.create({ nama, email, password, role: safeRole });
     sendTokenResponse(user, 201, res);
   } catch (err) {
@@ -85,6 +84,70 @@ exports.gantiPassword = async (req, res, next) => {
 
     user.password = req.body.passwordBaru;
     await user.save();
+    sendTokenResponse(user, 200, res);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// POST /auth/forgot-password
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      // Tetap kirim 200 agar email yang terdaftar tidak bisa ditebak
+      return res.status(200).json({
+        success: true,
+        message: 'Jika email terdaftar, tautan reset telah dikirim.'
+      });
+    }
+
+    const resetToken = user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+
+    // URL reset yang akan dikirim ke frontend
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    // TODO: Kirim email dengan resetUrl menggunakan nodemailer atau service lain
+    // Untuk sementara, token dikembalikan di response (hanya untuk development)
+    res.status(200).json({
+      success: true,
+      message: 'Tautan reset password berhasil dibuat.',
+      ...(process.env.NODE_ENV === 'development' && { resetUrl })
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// PUT /auth/reset-password/:token
+exports.resetPassword = async (req, res, next) => {
+  try {
+    // Hash token dari URL untuk dicocokkan dengan yang di database
+    const resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(req.params.token)
+      .digest('hex');
+
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() }
+    }).select('+resetPasswordToken +resetPasswordExpire');
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Token tidak valid atau sudah kadaluarsa.'
+      });
+    }
+
+    // Set password baru & hapus token reset
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
     sendTokenResponse(user, 200, res);
   } catch (err) {
     next(err);

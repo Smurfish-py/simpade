@@ -5,14 +5,19 @@ const {
   login,
   getMe,
   updateProfil,
-  gantiPassword
+  gantiPassword,
+  forgotPassword,
+  resetPassword
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
-router.post('/register', register);
-router.post('/login',    login);
-router.get('/me',        protect, getMe);
-router.put('/updateprofil',  protect, updateProfil);
-router.put('/gantipassword', protect, gantiPassword);
+router.post('/register',         register);
+router.post('/login',            login);
+router.post('/forgot-password',  forgotPassword);
+router.put('/reset-password/:token', resetPassword);
+
+router.get('/me',                protect, getMe);
+router.put('/updateprofil',      protect, updateProfil);
+router.put('/gantipassword',     protect, gantiPassword);
 
 module.exports = router;

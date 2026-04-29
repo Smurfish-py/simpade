@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 const UserSchema = new mongoose.Schema({
   nama: {
@@ -37,13 +38,21 @@ const UserSchema = new mongoose.Schema({
   },
   lastLogin: {
     type: Date
+  },
+  resetPasswordToken: {
+    type: String,
+    select: false
+  },
+  resetPasswordExpire: {
+    type: Date,
+    select: false
   }
 }, {
   timestamps: true
 });
 
-UserSchema.pre('save', async function () { 
-  if (!this.isModified('password')) return; 
+UserSchema.pre('save', async function () {
+  if (!this.isModified('password')) return;
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
@@ -55,9 +64,26 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
     { id: this._id, role: this.role },
-    process.env.JWT_SECRET, 
-    { expiresIn: process.env.JWT_EXPIRE || '30d' }  
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRE || '30d' }
   );
+};
+
+UserSchema.methods.getResetPasswordToken = function () {
+  // Generate token acak
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash token lalu simpan ke database
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // Token berlaku 10 menit
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+  // Kembalikan token asli (belum di-hash) untuk dikirim ke user
+  return resetToken;
 };
 
 module.exports = mongoose.model('User', UserSchema);
