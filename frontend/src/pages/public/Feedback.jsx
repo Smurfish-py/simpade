@@ -2,7 +2,7 @@ import { DummyFeedback } from "@/utils/DummyData";
 import React, { useState } from 'react';
 import { Send, MessageSquare, User, Mail, Info } from 'lucide-react';
 
-export function Feedback() {
+export default function Feedback() {
     const [status, setStatus] = useState(false);
 
     const handleSubmit = (e) => {
