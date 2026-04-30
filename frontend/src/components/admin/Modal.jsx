@@ -1,3 +1,5 @@
+import { Plus } from "lucide-react";
+
 export default function Modal({ data }) {  
     const jenisStyle = {
         pemasukan: {
@@ -133,6 +135,44 @@ export function InputModal() {
             <form method="dialog" className="modal-backdrop">
                 <button>close</button>
             </form>
+        </dialog>
+    )
+}
+
+export function AddProjectModal() {
+    return (
+        <dialog id="modal_add_project" className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box max-w-2xl">
+                <h3 className="font-bold text-lg mb-6 flex items-center gap-2 text-primary">
+                    <Plus size={24} />
+                    Input Proyek Baru
+                </h3>
+                
+                {/* Gunakan form utama untuk menangani input data */}
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* ... (Input fields tetap sama) ... */}
+                    
+                    <div className="form-control w-full md:col-span-2">
+                        <label className="label"><span className="label-text">Deskripsi Proyek</span></label>
+                        <textarea className="textarea textarea-bordered h-24" placeholder="Detail rencana pembangunan..."></textarea>
+                    </div>
+
+                    {/* Footer Modal */}
+                    <div className="modal-action md:col-span-2">
+                        {/* Tombol Batal: Ganti form method="dialog" dengan onClick JS */}
+                        <button 
+                            type="button" 
+                            className="btn btn-ghost mr-2"
+                            onClick={() => document.getElementById('modal_add_project').close()}
+                        >
+                            Batal
+                        </button>
+                        
+                        {/* Tombol Simpan: Harus memiliki type="submit" */}
+                        <button type="submit" className="btn btn-primary">Simpan Proyek</button>
+                    </div>
+                </form>
+            </div>
         </dialog>
     )
 }
