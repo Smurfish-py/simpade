@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 
 const ProjectMap = React.lazy(() => import('@/components/ProjectMap'));
 
-export function ProjectPublic() {
+export default function ProjectPublic() {
     return (
         <>
             <main className="p-8">
