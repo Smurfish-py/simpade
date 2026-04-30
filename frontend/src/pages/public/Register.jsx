@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../../api/axios';
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
     const [formData, setFormData] = useState({ nama: '', email: '', password: '', confirmPassword: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
