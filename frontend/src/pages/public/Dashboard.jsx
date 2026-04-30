@@ -4,7 +4,7 @@ import { DummyData } from "@/utils/dummyData";
 import PublicModal from "@/components/Public/Modal"; // Import modal publik yang tadi dibuat
 import { openModal } from "@/utils/action"; // Pastikan fungsi openModal tersedia
 
-export function DashboardPublic() {
+export default function DashboardPublic() {
     const [selectedData, setSelectedData] = useState(null);
 
     const user = JSON.parse(localStorage.getItem("user"));
