@@ -1,2 +1,2 @@
 export { default as Header } from '@/components/public/Header';
-export { ConfirmModal, AdminLoginModal } from '@/components/public/Modal';
+export { ConfirmModal } from '@/components/public/Modal';
