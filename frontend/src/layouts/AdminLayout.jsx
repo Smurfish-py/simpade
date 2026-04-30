@@ -24,7 +24,7 @@ export default function AdminLayout() {
         },
         {
             title: "Aspirasi",
-            dest: "/admin/feedback",
+            dest: "/admin/aspirations",
             icon: MessageCircle
         }
     ];
