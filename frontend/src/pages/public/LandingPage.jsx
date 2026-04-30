@@ -64,7 +64,7 @@ export default function LandingPage() {
                                 Transparansi Pembangunan Desa untuk Semua
                             </h1>
                             <p className="py-6 text-lg text-primary-content/80">
-                                Simpanan Dana Desa (SIMPADE) hadir untuk memudahkan Anda dalam memantau setiap proyek pembangunan dan menyuarakan aspirasi demi kemajuan desa kita bersama.
+                                Sistem Informasi Pantau Desa (SIMPADE) hadir untuk memudahkan Anda dalam memantau setiap proyek pembangunan dan menyuarakan aspirasi demi kemajuan desa kita bersama.
                             </p>
                             <div className="space-x-4">
                                 <Link to="/projects" className="btn btn-lg group">

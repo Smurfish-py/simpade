@@ -2,7 +2,6 @@
 node_modules/
 
 # File rahasia (isi password database dan secret key)
-.env
 
 # Log error
 npm-debug.log*
